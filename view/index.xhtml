@@ -45,7 +45,11 @@
   <?r @memos.each do |m| ?>
   <tr>
     <td>#{ m.time_sent.strftime( "%Y-%m-%d&nbsp;%H:%M" ) }</td>
-    <td>#{ m.time_told.strftime( "%Y-%m-%d&nbsp;%H:%M" ) }</td>
+    <td>#{
+      m.time_told ?
+        m.time_told.strftime( "%Y-%m-%d&nbsp;%H:%M" ) :
+        "(not received)"
+    }</td>
     <td>#{ h( m.sender ) }</td>
     <td>#{ h( m.message ) }</td>
   </tr>

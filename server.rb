@@ -10,7 +10,19 @@ class Main < Ramaze::Controller
   def index( recipient = nil )
     if recipient
       @recipient = recipient
-      @memos = Memo.where( recipient: recipient )
+      @memos = Memo.s(
+        %{
+          SELECT *
+          FROM memos m
+          WHERE
+            m.recipient = ?
+            OR ? ~ m.recipient_regexp
+          ORDER BY
+            time_sent DESC
+        },
+        recipient,
+        recipient
+      )
     end
   end
 end
