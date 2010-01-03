@@ -1,0 +1,56 @@
+<h3>Memos with Mathetes</h3>
+
+<?r if @memos.nil? ?>
+
+  <h4>Usage</h4>
+
+  <p>
+  Append your nick to the URL to see your memos.
+  For example, <a href="/Pistos">here</a> are Pistos' memos.
+  </p>
+
+  <h4>IRC Usage</h4>
+
+  <p>
+  Send a memo on the Freenode IRC network by using the following
+  command in any channel where Mathetes is:
+  </p>
+
+  <pre>
+  !memo &lt;recipient nick&gt; &lt;message&gt;
+  !memo /&lt;recipient regexp&gt;/ &lt;message&gt;
+  </pre>
+
+  <h4>Examples</h4>
+
+  <p>Send a memo to Pistos:</p>
+  <code>!memo Pistos This is cool!</code>
+
+  <p>Send a memo to joe, joe_away, or joe|work:</p>
+  <code>!memo /^joe/ Please message me.</code>
+
+<?r else ?>
+
+  <h4>Memos for #{@recipient}</h4>
+
+  <table>
+
+  <thead><tr>
+    <th>Time Sent</th>
+    <th>Time Told</th>
+    <th>Sender</th>
+    <th>Message</th>
+  </tr></thead>
+
+  <?r @memos.each do |m| ?>
+  <tr>
+    <td>#{ m.time_sent.strftime( "%Y-%m-%d&nbsp;%H:%M" ) }</td>
+    <td>#{ m.time_told.strftime( "%Y-%m-%d&nbsp;%H:%M" ) }</td>
+    <td>#{ h( m.sender ) }</td>
+    <td>#{ h( m.message ) }</td>
+  </tr>
+  <?r end ?>
+
+  </table>
+
+<?r end ?>
