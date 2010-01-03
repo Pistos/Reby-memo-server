@@ -1,3 +1,12 @@
+<html>
+
+<head>
+  <title>Memos with Mathetes</title>
+  <link rel="stylesheet" type="text/css" href="/style.css"/>
+</head>
+
+<body>
+
 <h3>Memos with Mathetes</h3>
 
 <?r if @memos.nil? ?>
@@ -42,8 +51,8 @@
     <th>Message</th>
   </tr></thead>
 
-  <?r @memos.each do |m| ?>
-  <tr>
+  <?r @memos.each_with_index do |m,i| ?>
+  <tr class="#{ i % 2 == 1 ? 'alternate' : '' }">
     <td>#{ m.time_sent.strftime( "%Y-%m-%d&nbsp;%H:%M" ) }</td>
     <td>#{
       m.time_told ?
@@ -58,3 +67,7 @@
   </table>
 
 <?r end ?>
+
+</body>
+
+</html>
